@@ -8,6 +8,10 @@ const app = express()
 app.use(cors())
 
 // set up routes
+// 1. hello endpoint
+app.get('/hello', (req, res) => {
+  res.sendStatus(204)
+})
 
 
 // set up HTTP server
