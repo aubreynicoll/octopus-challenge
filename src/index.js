@@ -15,8 +15,8 @@ app.get('/hello', (req, res) => {
 
 // 2. sum endpoint
 app.get('/sum', (req, res) => {
-  if (!req.query.numbers) { // mathmatical sum of empty set is 0 by convention
-    return res.send('0')
+  if (!req.query.numbers) { // return 400 if no numbers
+    return res.sendStatus(400)
   }
 
   let nums = req.query.numbers.split(',') // parse to array
@@ -37,7 +37,7 @@ app.get('/reverse-words', (req, res) => {
     return res.send('')
   }
 
-  let sentenceArray = req.query.sentence.split(new RegExp(/(?=[\W])|(?<=[\W])/g)) // split with regex
+  let sentenceArray = req.query.sentence.split(new RegExp(/(?=[^a-zA-Z])|(?<=[^a-zA-Z])/g)) // split with regex
 
   // strip quotes from beginning and end
   if (sentenceArray[0] === '\'' || sentenceArray[0] === '\"') sentenceArray.shift()
