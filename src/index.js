@@ -21,7 +21,7 @@ app.get('/sum', (req, res) => {
 
   let nums = req.query.numbers.split(',') // parse to array
   
-  if (nums.some(num => !Boolean(Number(num)) && num !== '0')) { // arguments must strictly be numbers
+  if (nums.some(num => !Boolean(Number(num)) && Number(num) !== 0)) { // arguments must strictly be numbers
     return res.sendStatus(400)
   }
 
