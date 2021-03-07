@@ -31,6 +31,23 @@ app.get('/sum', (req, res) => {
   res.send(`${sum}`)
 })
 
+// 3. reverse-words endpoint
+app.get('/reverse-words', (req, res) => {
+  if (!req.query.sentence) { // if no sentence, return empty string
+    return res.send('')
+  }
+
+  let sentenceArray = req.query.sentence.split(new RegExp(/(?=[\W])|(?<=[\W])/g)) // split with regex
+
+  // strip quotes from beginning and end
+  if (sentenceArray[0] === '\'' || sentenceArray[0] === '\"') sentenceArray.shift()
+  if (sentenceArray[sentenceArray.length - 1] === '\'' || sentenceArray[sentenceArray.length - 1] === '\"') sentenceArray.pop()
+
+  sentenceArray = sentenceArray.map(s => s.split('').reverse().join('')) // reverse each string
+
+  res.send(sentenceArray.join('')) // return joined array (becomes string)
+})
+
 // set up HTTP server
 const PORT = 3001
 app.listen(PORT, () => {
